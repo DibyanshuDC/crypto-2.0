@@ -1,0 +1,146 @@
+/*colors*/
+
+.font-open {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.font-Roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.brand-main-logo {
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.brand-main-logo img {
+    max-height: 56px;
+    max-width: 100%;
+}
+
+.menu-link {
+    font-size: 1.5em;
+}
+
+.userDropDown a {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.userDropDown img {
+    height: 40px;
+    width: 40px;
+    border: 2px solid white;
+}
+
+.userDropDown .userName {
+    margin: 0 5px;
+}
+
+nav ul li.active {
+    /* background-color: rgba(255,255,255.1); */
+    border-bottom: 3px solid #fcdb7a;
+}
+
+#showMobMenu {
+    width: 100%;
+}
+
+.header-section {
+    margin-top: 3px;
+}
+
+.header-section .coin-list li {
+    margin: 0 8px;
+    font-weight: bolder;
+}
+
+.bread {
+    font-size: 16px;
+    padding: 8px 0;
+
+}
+
+.bread a {
+    color: gray;
+}
+
+.bread i {
+    margin-right: 10px;
+}
+
+.bread a span.spacer {
+    margin: 0 10px;
+}
+
+.bread a.active {
+    color: black;
+}
+
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.alert-blue {
+    margin: 15px 10px;
+    color: blue;
+    border: 2px solid rgba(65, 154, 209, 1);
+    padding: 15px;
+    border-radius: 3px;
+    background-color: rgba(65, 154, 209, 0.3);
+}
+
+#dash .wallet-icon {
+    font-size: 3em;
+}
+
+
+#wallet .wallets {
+    border-left: 0;
+    border-right: 0;
+}
+
+#wallet .wallet-icon {
+    margin-top: 20px;
+    font-size: 2.5em;
+}
+
+#wallet .transactions .tabs .indicator {
+    background-color: #e8e8e8;
+    right: 0px;
+    bottom: 5px;
+    left: 0px;
+
+}
+
+#wallet .transactions .tabs li {}
+
+#wallet .transactions .tab a {
+    color: #a9a4a4;
+    cursor: pointer;
+    background-color: #e8e8e8;
+    border-bottom: white;
+}
+
+#wallet .transactions .tab .active {
+    border: 1px solid black;
+    border-bottom: white;
+    background: #2f80d6;
+    color: white;
+    cursor: not-allowed;
+}
+
+#market .trade inputbox card {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#useroptions a {
+    color: black;
+    font-size: 1em;
+    font-weight: bolder;
+}
