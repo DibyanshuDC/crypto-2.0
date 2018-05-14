@@ -1,0 +1,89 @@
+<div id="home" class="container-fluid">
+    <div ng-show ="alert"     ng-show="alert"   class="alert-blue margin lighten-5">
+        <div class="row no-margin">
+            <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
+            <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
+        </div>
+    </div>
+    <div class="card-panel">
+        <div class="row">
+            <div class='prices'>
+                <div class='col m12' style='margin-top:20px'>
+                    <h3 class="align-center">Indicative Prices. For actual data Please log in now.</h3>
+                    <div class='row'>
+                        <div class='col m3 col s6'>
+                            <div class='form-group form-inline'>
+                                <input type='text' class='form-control filtercoins' ng-model="filtercoins" placeholder="Filter list" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="coins" class='col m12'>
+                    <ul class='listgroup'>
+                        <li class="list-group-item hidden-xs hidden-sm listtitle">
+                            <div class='row'>
+                                <div class="col s2"><b>Crypto Coin</b></div>
+                                <div class="col s2"><b>Buy Rate</b></div>
+                                <div class="col s2"><b>Sell Rate</b></div>
+                                <div class="col s2"><b>Market Cap</b></div>
+                                <div class="col s1"><b>Change</b><small> (24hrs)</small></div>
+                                <div class="col s3 center-align"><b>View Exchange</b></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item hide-on-med-and-up listtitle">
+                            <div class='row'>
+                                <div class="col s3"><b>Coin</b></div>
+                                <div class="col s3"><b>Buy</b></div>
+                                <div class="col s3"><b>Sell</b></div>
+                                <div class="col s3"><b>24 hrs</b></div>
+                            </div>
+                        </li>
+                        <span ng-repeat="coin in coins | filter: filtercoins |orderBy : 'rank'">
+                            <li class="hide-on-small-only list-group-item tradeitem" data-coin='{{coin.symbol}}' data-coindisplay='{{coin.symbol}}'>
+                                <div class='row marketrow'>
+                                    <div class="col s2 valign-wrapper"><img class="margin-sm-horiz" ng-src='img/{{coin.name}}.png' style='height:37px' />{{coin.name}}</div>
+                                    <div class="col s2">${{coin.price}}</div>
+                                    <div class="col s2">${{coin.price }}</div>
+                                    <div class="col s2">${{coin.marketCap}}</div>
+                                    <div class="col s1"><span ng-class="coin.percentageChange < 0 ? 'movedown' : 'moveup'">{{coin.percentageChange}}%</span></div>
+                <div class="col s3 flex-fixed flex-center"><a ng-disabled="!show" ng-href="#!/market/{{coin.symbol}}" class='btn blue btn-sm'>Trade {{coin.symbol}}</a></div>
+            </div>
+            </li>
+            <li class="hide-on-med-and-up list-group-item tradeitem" data-coin='{{coin.symbol}}' data-coindisplay='{{coin.symbol}}'>
+                <div class='row'>
+                    <div class="col s3" style='line-height:40px'><img ng-src='img/{{coin.name}}.png' style='height:27px' /></div>
+                    <div class="col s3" style='line-height:40px'>${{coin.price}}</div>
+                    <div class="col s3" style='line-height:40px'>${{coin.price}}</div>
+                    <div class="col s3" style='line-height:40px'><span ng-class="coin.percentageChange < 0 ? 'movedown' : 'moveup'">{{coin.percentageChange}}%</span></div>
+                    <div class='col s3'>
+                        {{coin.symbol}}
+                    </div>
+                    <div class='col s9'>
+                        <div>
+                            <!--
+                                                <a ng-href="#!/do/buy/{{coin.id}}" class='btn btn-default btn-sm'> Buy </a>&nbsp;
+                                                <a ng-href='#!/do/sell/{{coin.id}}' class='btn btn-default btn-sm'> Sell </a>&nbsp;
+                            -->
+                            <a ng-href='#!/market/{{coin.symbol}}' class='btn blue btn-sm'>Trade {{coin.symbol}}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            </span>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<style>
+    .movedown {
+        color: red;
+    }
+
+
+    .moveup {
+        color: green;
+    }
+
+</style>

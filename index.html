@@ -30,26 +30,32 @@
             <nav class="font-condensed z-depth-2  black">
                 <div class="nav-wrapper margin-sm-horiz">
                     <a href="#" class="brand-main-logo valign-wrapper left">
-						<img src="logo.png" alt=""><span> CryptoCentric</span>
+						<img src="images/logo.png" alt=""><span> CryptoCentric</span>
 					</a>
                     <a ng-click="showMobMenu()" class="brand-main-logo valign-wrapper hide-on-med-and-up right dropdown-trigger showMob" data-target='showMobMenu'>
 						<span class="fa fa-bars"></span>
 					</a>
-                    <div ng-click="userDD()" class="right hide-on-small-only userDropDown">
-                        <div class="dropdown-trigger userDD" data-target='useroptions'>
-                            <a class='valign-wrapper'><img class="circle" src="6.jpg" alt=""><span class="userName">User Name</span><i class="fa fa-caret-down"></i></a>
+                    <div ng-if="loggedin">
+                        <div ng-click="userDD()" class="right hide-on-small-only userDropDown">
+                            <div class="dropdown-trigger userDD" data-target='useroptions'>
+                                <a class='valign-wrapper'><img class="circle" src="6.jpg" alt=""><span class="userName">{{userName}}</span><i class="fa fa-caret-down"></i></a>
+                            </div>
+                            <ul id='useroptions' class='dropdown-content black-text'>
+                                <li><a href="#!/sunny/profile">Profile</a></li>
+                                <li><a href="#!/sunny/kyc">KYC</a></li>
+                                <li><a href="#!/sunny/twofa">TWO FA</a></li>
+                                <li><a ng-click="logout()" href="#!"><i class="fa fa-power-off"></i>Logout</a></li>
+                            </ul>
                         </div>
-                        <ul id='useroptions' class='dropdown-content black-text'>
-                            <li><a href="#!/sunny/profile">Profile</a></li>
-                            <li><a href="#!/sunny/kyc">KYC</a></li>
-                            <li><a href="#!/sunny/twofa">TWO FA</a></li>
-                            <li><a href="#!"><i class="fa fa-power-off"></i>Logout</a></li>
+                        <ul class="right hide-on-small-only">
+                            <li ng-repeat="item in menus" ng-class="{active: isActive(item)}"><a href="#!{{item.path}}">{{item.title}}</a></li>
                         </ul>
                     </div>
-                    <ul class="right hide-on-small-only">
-                        <li ng-repeat="item in menus" ng-class="{active: isActive(item)}"><a href="#!{{item.path}}">{{item.title}}</a></li>
-
-                    </ul>
+                    <div ng-if="!loggedin">
+                        <ul class="right hide-on-small-only">
+                            <li ng-repeat="item in publicMenus" ng-class="{active: isActive(item)}"><a href="#!{{item.path}}">{{item.title}}</a></li>
+                        </ul>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div>
@@ -63,7 +69,7 @@
                     </ul>
                 </div>
             </nav>
-            <div class="header-section white">
+            <div ng-if="loggedin" class="header-section white">
                 <div class="container-fluid">
                     <div class="row no-margin">
                         <div class="col s6">
@@ -79,11 +85,14 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="row grey no-margin lighten-4 padding-sm-ver">
-                        <div class="col s12 bread">
+                    <div style="justify-content: space-between;" class="grey lighten-4 padding valign-wrapper space-between">
+                        <div class="bread">
                             <i class="fas fa-home"></i>
                             <a href="#!">Home <span class="spacer">/</span></a>
                             <a ng-repeat="item in currentPage" ng-class="$index+1 == currentPage.length ? 'active text-bolder' : '' " href="#!">{{item}} <span ng-if="$index+1 != currentPage.length" class="spacer">/</span></a>
+                        </div>
+                        <div>
+                            <a href="/" class="btn blue right">All Coins</a>
                         </div>
                     </div>
                 </div>
@@ -99,13 +108,17 @@
 
 
     <script src="js/angular.min.js"></script>
+    <script src="js/recaptcha.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/materialize.min.js"></script>
-
+    <script src="js/custom.js"></script>
     <script src="controllers/navctrl.js"></script>
     <script src="controllers/dashctrl.js"></script>
+    <script src="controllers/homectrl.js"></script>
     <script src="controllers/loginctrl.js"></script>
+    <script src="controllers/forgotctrl.js"></script>
     <script src="controllers/regctrl.js"></script>
     <script src="controllers/marketctrl.js"></script>
     <script src="controllers/walletctrl.js"></script>

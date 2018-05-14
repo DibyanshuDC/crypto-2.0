@@ -1,8 +1,8 @@
 <div id="wallet" class="container-fluid">
-    <div class="alert-blue margin lighten-5">
+    <div ng-show="alert" ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
-            <p class="col no-margin s1 right-align"><i class="fa fa-times"></i></p>
+            <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
         </div>
     </div>
     <div class="row">
@@ -13,83 +13,65 @@
                         <div class="flex">
                             <div class="input-field">
                                 <i class="fa fa-search prefix"></i>
-                                <input id="search" type="text" class="validate">
-                                <label for="search">Search</label>
+                                <input ng-model="filterWallets" id="search1" type="text" class="validate">
+                                <label for="search1">Search</label>
                             </div>
                         </div>
                     </li>
-                    <li class="collection-item">
-                        <div class="flex">
-                            <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                            <p class="text-bolder"><big class="text-normal">USD Wallet</big><br>Balance: 33,668.00<br>Locked: 33,668.00
-                            </p>
-                        </div>
+                    <!--
+                    <li class="collection-item" ng-class=" walletName=='usd'? 'selected' : ''">
+                        <a href="#!/wallet/usd">
+                            <div class="flex">
+                                <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
+                                <p class="text-bolder"><big class="text-normal">USD Wallet</big><br>Balance: 33,668.00<br>Locked: 33,668.00
+                                </p>
+                            </div>
+                        </a>
                     </li>
-                    <li class="collection-item">
-                        <div class="flex">
-                            <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                            <p class="text-bolder"><big class="text-normal">BTC Wallet</big><br>Balance: 0<br>Locked: 0
-                            </p>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="flex">
-                            <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                            <p class="text-bolder"><big class="text-normal">ETH Wallet</big><br>Balance: 0<br>Locked: 0
-                            </p>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="flex">
-                            <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                            <p class="text-bolder"><big class="text-normal">LTC Wallet</big><br>Balance: 0<br>Locked: 0
-                            </p>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="flex">
-                            <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                            <p class="text-bolder"><big class="text-normal">LISK Wallet</big><br>Balance: 0<br>Locked: 0
-                            </p>
-                        </div>
+                    -->
+                    <li ng-repeat="item in wallets | filter: filterWallets" class="collection-item" ng-class="(walletName == item.id) ? 'selected' : 'none'">
+                        <a ng-href="#!/wallet/{{item.id}}">
+                            <div class="flex">
+                                <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
+                                <p class="text-bolder"><big class="text-normal"><span class="text-upper">{{item.id}}</span> Wallet</big><br>Balance: {{item.bal}}<br>Locked: {{item.locked}}
+                                </p>
+                            </div>
+                        </a>
                     </li>
                 </ul>
-                <!--
-                <table id="" class="table responsive-table highlight">
-
-                </table>
--->
             </div>
         </div>
         <div class="col s12 m9">
             <div class="card white">
                 <div class="card-action top">
                     <div class="margin-sm-ver">
-                        <big>USD Wallet </big>
+                        <big><span class="text-upper">{{walletName}}</span> {{action ? action : 'Wallet'}} </big>
                         <span class="right valign-wrapper">
-                        <a class="waves-effect waves-light btn margin-sm-horiz">Deposit</a> <a class="waves-effect waves-light btn ">Withdraw</a>
+                        <a ng-click="deposit()" class="waves-effect waves-light btn margin-sm-horiz">Deposit</a> <a ng-click="withdraw()" class="waves-effect waves-light btn ">Withdraw</a>
                         </span>
                     </div>
                 </div>
-                <div class="card-content transactions">
+
+                <div ng-show="transbox" class="card-content transactions">
                     <div class="nav-tabs">
-                        <ul class="tabs full-sz">
-                            <li class="tab"><a class="active" href="#deposits">Deposits</a></li>
-                            <li class="tab"><a class="" href="#withdrawns">Withdraw</a></li>
+                        <ul class="tabs full-sz" style="overflow-x: hidden;">
+                            <li class="tab"><a class="active" href="#deposits">Deposit History</a></li>
+                            <li class="tab"><a class="" href="#withdrawns">Withdraw History</a></li>
                             <div class="indicator"></div>
                         </ul>
+                        <br><br>
                     </div>
                     <div class="row">
                         <div class="col s6">
                             <div class="input-field">
                                 <i class="fa fa-search prefix"></i>
-                                <input id="search" type="text" class="validate">
-                                <label for="search">Search</label>
+                                <input id="search2" type="text" class="validate">
+                                <label for="search2">Search</label>
                             </div>
                         </div>
                         <div class="col s6">
                             <div class="input-field">
-                                <select>
+                                <select id="rowval">
                                   <option value="1" selected>10</option>
                                   <option value="2">20</option>
                                   <option value="3">50</option>
@@ -99,8 +81,8 @@
                         </div>
                     </div>
                     <div id="transacts">
+                        <div>Change from here below {{walletName}}</div>
                         <div id="deposits" class="row">
-
                             <div class="col s12">
                                 <table id="" class="table responsive-table highlight">
                                     <thead>
@@ -390,6 +372,65 @@
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="card-content" ng-if="depositbox">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select id="payOption" class="browser-default">
+                              <option value="" selected>Choose Payment Method</option>
+                              <option value="1">DEBITCARD</option>
+                              <option value="2">PAYPAL</option>
+                              <option value="3">STRIPE</option>
+                            </select>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text" type="text" data-length="10">
+                            <label for="input_text">Amount</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text" type="text" disabled data-length="10">
+                            <label for="input_text">Fees</label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="DEPOSIT()" class="btn right blue">Deposit</a>
+                    </div>
+                </div>
+                <div class="card-content" ng-if="withdrawbox">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select id="wthIn" class="browser-default">
+                              <option value="" selected>Choose your Method</option>
+                              <option value="1">ETHERS</option>
+                              <option value="2">BITCOIN</option>
+                            </select>
+
+                        </div>
+                        <div class="input-field col s6">
+                            <select id="wthTo" class="browser-default">
+                                <option value="" disabled selected>Choose your Bank</option>
+                                <option value="1">AXIS</option>
+                                <option value="2">ICICI</option>
+                                <option value="3">NG</option>
+                             </select>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text" type="text" data-length="10">
+                            <label for="input_text">Amount</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text" type="text" disabled data-length="10">
+                            <label for="input_text">Fee</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input_text" disabled type="text" data-length="10">
+                            <label for="input_text">Total</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="WITHDRAW()" class="btn right blue">Withdraw</a>
                     </div>
                 </div>
 

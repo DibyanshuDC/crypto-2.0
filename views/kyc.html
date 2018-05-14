@@ -1,8 +1,8 @@
 <div id="wallet" class="container-fluid">
-    <div class="alert-blue margin lighten-5">
+    <div ng-show="alert" ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
-            <p class="col no-margin s1 right-align"><i class="fa fa-times"></i></p>
+            <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
         </div>
     </div>
     <div class="row">
@@ -20,46 +20,36 @@
                     <div style='padding-top:10px;padding-bottom:50px'>
                         <form id="QuoteForm" class="QuoteForm">
                             <fieldset>
-                                <h3 class="section-title">Step 1 of 5</h3>
+                                <h3 class="section-title">Step {{progress}} of 5</h3>
                                 <br>
-                                <div class="form-layer-steps form-layer-tolal-steps-5">
+                                <div class="form-layer-steps form-layer-tolal-steps-4">
                                     <div class="form-layer-progress">
-                                        <div class="form-layer-progress-line" style="width: {{progress*20}}%;"></div>
+                                        <div class="form-layer-progress-line" style="width: {{progress*(100 / max_steps)}}%;"></div>
                                     </div>
                                     <!-- Step 1 -->
-                                    <div class="form-layer-step" ng-class="{active: progress > 0.9}">
+                                    <div class="form-layer-step" style="width: {{100/max_steps}}%" ng-class="{active: progress > (max_steps - 4 + 0.9)}">
                                         <div class="form-layer-step-icon activestep"><i class="fa fa-user"></i></div>
                                         <p>Personal Info</p>
                                     </div>
                                     <!-- Step 1 -->
 
                                     <!-- Step 2 -->
-                                    <div class="form-layer-step" ng-class="{active: progress > 1.9}">
-                                        <div class="form-layer-step-icon"><i class="fa fa-building"></i></div>
-                                        <p>Bank Details</p>
-                                    </div>
-                                    <!-- Step 2 -->
-
-                                    <!-- Step 3 -->
-                                    <div class="form-layer-step" ng-class="{active: progress > 2.9}">
+                                    <div class="form-layer-step" style="width: {{100/max_steps}}%" ng-class="{active: progress > (max_steps - 3 + 0.9)}">
                                         <div class="form-layer-step-icon"><i class="fa fa-hands-helping"></i></div>
                                         <p>Upload Docs</p>
                                     </div>
                                     <!-- Step 3 -->
 
-                                    <!-- Step 4 -->
-                                    <div class="form-layer-step" ng-class="{active: progress > 3.9}">
+                                    <div class="form-layer-step" style="width: {{100/max_steps}}%" ng-class="{active: progress > (max_steps - 2 + 0.9)}">
                                         <div class="form-layer-step-icon"><i class="fa fa-address-card"></i></div>
                                         <p>KYC Review</p>
                                     </div>
                                     <!-- Step 4 -->
-
-                                    <!-- Step 5 -->
-                                    <div class="form-layer-step" ng-class="{active: progress > 4.9}">
+                                    <div class="form-layer-step" style="width: {{100/max_steps}}%" ng-class="{active: progress > (max_steps - 1 + 0.9)}">
                                         <div class="form-layer-step-icon"><i class="fa fa-check"></i></div>
                                         <p>Approved</p>
                                     </div>
-                                    <!-- Step 5 -->
+                                    <!-- Step 4 -->
                                 </div>
                             </fieldset>
                         </form>
@@ -98,12 +88,11 @@
                                 top: 0;
                             }
 
-                            #QuoteForm .form-layer-tolal-steps-5 .form-layer-step {
+                            #QuoteForm .form-layer-tolal-steps-4 .form-layer-step {
                                 float: left;
                                 padding: 0;
                                 position: relative;
                                 text-align: center;
-                                width: 20%;
                             }
 
                             #QuoteForm .form-layer-step-icon {
@@ -145,141 +134,204 @@
                         </style>
 
                         <div class="container">
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <div class="profile-img">
-                                        <img src="6.jpg" class="img-rounded" style="height:320px; width:320px; padding: 10px 0;">
-                                        <div class="">
-                                            <!--<a class="btn btn-primary" ng-href="!#/camera">Click Now</a>-->
-                                            <input type="file" accept="image/*">
+                            <article ng-if="progress==1">
+                                <div class="row">
+                                    <div class="col s12 m6">
+                                        <div class="profile-img">
+                                            <img src="6.jpg" class="img-rounded" style="height:320px; width:320px; padding: 10px 0;">
+                                            <div class="">
+                                                <!--<a class="btn btn-primary" ng-href="!#/camera">Click Now</a>-->
+                                                <input type="file" accept="image/*">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h4>Instructions</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="fName">First Name:</label>
-                                        <input type="text" class="form-control" id="fName">
+                                    <div class="col s12 m6">
+                                        <h4>Instructions</h4>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
                                     </div>
-                                    <label class="radio-inline">
-                      <input type="radio" name="gender">Male
-                    </label>
-                                    <label class="radio-inline">
-                      <input type="radio" name="gender">Female
-                    </label>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="fName">First Name:</label>
+                                            <input type="text" class="form-control" id="fName">
+                                        </div>
+                                        <label class="radio-inline">
+                                          <input type="radio" name="gender">Male
+                                        </label>
+                                        <label class="radio-inline">
+                                          <input type="radio" name="gender">Female
+                                        </label>
 
-                                    <!-- /input-group -->
-                                </div>
-                                <!-- /.col-lg-6 -->
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="lName">Last Name:</label>
-                                        <input type="text" class="form-control" id="lName">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
 
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="add1">Address Line 1:</label>
-                                        <input type="text" class="form-control" id="add1">
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
+                                    <!-- /.col-lg-6 -->
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="lName">Last Name:</label>
+                                            <input type="text" class="form-control" id="lName">
+                                        </div>
 
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="add2">Address Line 2:</label>
-                                        <input type="text" class="form-control" id="add2">
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="city">City:</label>
-                                        <input type="text" class="form-control" id="city">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="state">State/Province/Region:</label>
-                                        <input type="text" class="form-control" id="state">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="country">Country of Residence:</label>
-                                        <input type="text" class="form-control" id="country">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="zip">ZIP/Postal Code:</label>
-                                        <input type="text" class="form-control" id="zip">
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
 
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="mobile">Mobile (with Country Code):</label>
-                                        <input type="text" class="form-control" id="mobile">
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="add1">Address Line 1:</label>
+                                            <input type="text" class="form-control" id="add1">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="dob">Date of Birth (YYYY-MM-DD):</label>
-                                        <input type="text" class="form-control" id="dob">
+
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="add2">Address Line 2:</label>
+                                            <input type="text" class="form-control" id="add2">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="idType">ID Type:</label>
-                                        <select type="text" class="form-control" id="idType">
-                            <option>Passport</option>
-                            <option>Driving License</option>
-                        </select>
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="city">City:</label>
+                                            <input type="text" class="form-control" id="city">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="idNum">ID Number:</label>
-                                        <input type="text" class="form-control" id="idNum">
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="state">State/Province/Region:</label>
+                                            <input type="text" class="form-control" id="state">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="idFrom">ID Issued On(YYYY-MM-DD):</label>
-                                        <input type="text" class="form-control" id="idFrom">
+                                    <div class="col s12 m3">
+                                        <div class="input-group">
+                                            <label for="country">Country of Residence:</label>
+                                            <input type="text" class="form-control" id="country">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
-                                </div>
-                                <div class="col s12 m6">
-                                    <div class="input-group">
-                                        <label for="idTo">ID Expiry Date(YYYY-MM-DD):</label>
-                                        <input type="text" class="form-control" id="idTo">
+                                    <div class="col s12 m3">
+                                        <div class="input-group">
+                                            <label for="zip">ZIP/Postal Code:</label>
+                                            <input type="text" class="form-control" id="zip">
+                                        </div>
+
                                     </div>
-                                    <!-- /input-group -->
+
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="mobile">Mobile (with Country Code):</label>
+                                            <input type="text" class="form-control" id="mobile">
+                                        </div>
+
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="dob">Date of Birth (YYYY-MM-DD):</label>
+                                            <input type="text" class="form-control" id="dob">
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                            </div>
+                                <br>
+                            </article>
+                            <article ng-if="progress==2">
+                                <br><br>
+                                <div class="row">
+                                    <h5 class="red-text center"> We follow a strict 100 point check !! Your current score is {{score}} points.</h5>
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="kycname">Full Name:</label>
+                                            <input type="text" class="form-control" id="kycname">
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <div class="input-group">
+                                            <label for="kycadd">Address as in Document:</label>
+                                            <input type="text" class="form-control" id="kycadd">
+                                        </div>
+                                    </div>
+                                    <div ng-repeat="n in supportdocs">
+                                        <div class="col s12 m6">
+                                            <div class="input-group">
+                                                <label>ID Type:</label>
+                                                <select class="browser-default" ng-model="sdocs" ng-change="updateDocs(sdocs)">
+                                                    <option value="" disabled selected>Document Type</option>
+                                                    <option ng-repeat="options in docs" value="options.value">{{options.idType}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>Supporting Docs</span>
+                                                    <input type="file" multiple>
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6">
+                                            <div class="input-group">
+                                                <label for="country">Country of Residence:</label>
+                                                <input type="text" class="form-control" id="country">
+                                            </div>
+
+                                        </div>
+                                        <div class="col s12 m6">
+                                            <div class="input-group">
+                                                <label for="idNum">ID Number:</label>
+                                                <input type="text" class="form-control" id="idNum">
+                                            </div>
+
+                                        </div>
+                                        <div class="col s12 m6">
+                                            <div class="input-group">
+                                                <label for="idFrom">ID Issued On(YYYY-MM-DD):</label>
+                                                <input type="text" class="form-control" id="idFrom">
+                                            </div>
+
+                                        </div>
+                                        <div class="col s12 m6">
+                                            <div class="input-group">
+                                                <label for="idTo">ID Expiry Date(YYYY-MM-DD):</label>
+                                                <input type="text" class="form-control" id="idTo">
+                                            </div>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </article>
+                            <article ng-if="progress==3">
+                                <br>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h3 class=" orange-text underline">Your Application is in Review</h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
+                                    </div>
+                                </div>
+                                <br>
+                            </article>
+                            <article ng-if="progress==4">
+                                <br>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h3 style="padding: 18px 0; border-radius: 5px;" class="green white-text center"><strong>Your Verification Process is Complete !!</strong><br></h3>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa quaerat, reprehenderit! Placeat hic sit laboriosam quos sequi veniam possimus dignissimos cumque fugiat amet! Ipsa vitae iure placeat odit molestias saepe!</p>
+                                    </div>
+                                </div>
+                                <br>
+                            </article>
                             <!-- /.row -->
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-info">Save</button>
-                                <button type="button" class="btn btn-primary">Submit</button>
+                            <div ng-if="progress<3" class="btn-group pull-right">
+                                <button ng-click="save()" type="button" class="btn btn-info">Save</button>
+                                <button ng-click="submit()" type="button" class="btn btn-primary">Submit</button>
                             </div>
 
                         </div>

@@ -1,0 +1,54 @@
+<div ng-show="alert" ng-show="alert" class="alert-blue margin valign-wrapper lighten-5 full-width">
+    <div class="row no-margin full-width">
+        <p class="col no-margin s11 center-align"><big><strong>{{success}}</strong></big></p>
+        <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
+    </div>
+</div>
+
+
+<div id="login" class="valign-wrapper container-fluid">
+    <div class="container-fluid">
+        <div class="mx-auto" style="max-width: 420px;">
+            <div class="card-panel">
+                <div class="center">
+                    <img src="images/logo.png" width="46px" height="46px" alt="">
+                </div>
+                <h5 class="center">cryptocentric</h5>
+                <form>
+                    <div ng-if="progress==1" class="row">
+                        <p></p>
+                        <div class="input-field col s12">
+                            <input ng-model="email" id="email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div ng-if="progress==2" class="row">
+                        <p></p>
+                        <div class="input-field col s12">
+                            <input ng-model="otp" id="otp" type="password" class="validate">
+                            <label for="otp">OTP</label>
+                        </div>
+                    </div>
+                    <div ng-if="progress==2" class="row">
+                        <p></p>
+                        <div class="input-field col s12">
+                            <input ng-model="password" id="pass" type="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input ng-model="passwordc" id="passc" type="password" class="validate">
+                            <label for="passwordc">Confirm Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a ng-click="retrieve()" class="btn blue full-width" id="login_btn">Retrieve Password <i class="icon-arrow-right14 position-right"></i></a>
+                    </div>
+                    <div class="row">
+                        <a class="btn green full-width" id="login_btn" ng-href="#!/login">Login <i class="icon-arrow-right14 position-right"></i></a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

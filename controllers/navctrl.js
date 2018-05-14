@@ -1,8 +1,64 @@
 'use strict';
 
 angular.module('cryptoCentric')
-    .controller('NavCtrl', function ($scope, $location) {
-        $scope.currentPage = $location.path().substr(1).split('/');
+    .controller('NavCtrl', function ($scope, $location, $window) {
+
+        var token;
+        $scope.userName = "";
+
+        $scope.loggedin = false;
+
+        $scope.$watch('loggedin', function () {
+            if ($scope.loggedin) {
+                $window.location.href = '/#!/dashboard';
+                $scope.userName = localStorage.getItem("username");
+                //$location.url("/dashboard");
+            } else {
+
+                $window.location.href = '/#!/';
+            }
+        });
+
+
+        function verifytoken() {
+            if (typeof (Storage) !== "undefined") {
+
+                // Retrieve
+                token = localStorage.getItem("token");
+                // verify token
+                if (token) {
+                    $scope.loggedin = true;
+                    $scope.userName = localStorage.getItem("username");
+                }
+
+            } else {
+                alert("Sorry, your browser does not support Web Storage...and so this app won't work");
+            }
+        }
+
+        verifytoken();
+
+
+
+        $scope.logout = function () {
+            localStorage.removeItem("token");
+            localStorage.removeItem("username");
+            $window.location.href = '/';
+        };
+
+        $scope.$watch(function () {
+            return $location.path();
+        }, function (value) {
+            $scope.url_address = $location.path();
+            $scope.currentPage = $location.path().substr(1).split('/');
+
+            if (!$scope.url_address) {
+                $scope.currentPage = $scope.url_address.substr(1).split('/');
+            }
+
+            verifytoken();
+        });
+
         $scope.showMobMenu = function () {
             var elem = document.querySelector('.dropdown-trigger.showMob');
             var instance = M.Dropdown.init(elem, {
@@ -24,9 +80,20 @@ angular.module('cryptoCentric')
         }
 
 
-        $scope.menus = [
+        $scope.publicMenus = [
             {
                 path: '/',
+                title: 'Home'
+            },
+            {
+                path: '/login',
+                title: 'Login'
+            }
+        ];
+
+        $scope.menus = [
+            {
+                path: '/dashboard',
                 title: 'Dashboard'
             },
             {
@@ -38,7 +105,7 @@ angular.module('cryptoCentric')
                 title: 'Orders'
             },
             {
-                path: '/market/usd',
+                path: '/market/btc',
                 title: 'Markets'
             },
             {
@@ -47,7 +114,7 @@ angular.module('cryptoCentric')
             },
         ];
         $scope.isActive = function (item) {
-            return item.path == $location.path();
+            return item.path == $scope.url_address;
         };
 
         //        $scope.myDetails = function (index) {

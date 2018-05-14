@@ -3,20 +3,20 @@
         <div class="mx-auto" style="max-width: 420px;">
             <div class="card-panel">
                 <div class="center">
-                    <img src="/logo.png" width="46px" height="46px" alt="">
+                    <img src="images/logo.png" width="46px" height="46px" alt="">
                 </div>
                 <h5 class="center">cryptocentric</h5>
                 <form>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
+                            <input ng-model="email" id="email" type="email" class="validate">
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Password</label>
+                            <input id="password" type="password" ng-model="password" class="validate">
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <div class="row">
@@ -30,17 +30,21 @@
                         </div>
                         <div class="col s6">
                             <p>
-                                <a href="">Forgot password ?</a>
+                                <a ng-href="#!/forgotpassword">Forgot password ?</a>
                             </p>
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn blue full-width" id="login_btn">Login <i class="icon-arrow-right14 position-right"></i></button> </div>
+                        <div tabindex="3" theme="clean" vc-recaptcha key="'6Lew1FAUAAAAAPz0ioB87uPS6ELi86kxQbU_JdFb'"></div>
+                    </div>
+                    <div class="row">
+                        <a ng-click="login()" class="btn blue full-width" id="login_btn">Login <i class="icon-arrow-right14 position-right"></i></a>
+                    </div>
                     <div class="row">
                         <div class="content-divider text-muted"><span>Don't have an account?</span></div>
                     </div>
                     <div class="row">
-                        <button class="btn green full-width" id="login_btn" href="#!/register">Register <i class="icon-arrow-right14 position-right"></i></button>
+                        <a class="btn green full-width" id="login_btn" ng-href="#!/register">Register <i class="icon-arrow-right14 position-right"></i></a>
                     </div>
 
                 </form>

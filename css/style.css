@@ -134,6 +134,18 @@ nav ul li.active {
     cursor: not-allowed;
 }
 
+#wallet .collection .collection-item a {
+    cursor: pointer;
+    color: black;
+}
+
+#wallet .collection .collection-item.selected,
+#wallet .collection .collection-item.selected a {
+    background-color: black;
+    color: white;
+}
+
+
 #market .trade inputbox card {
     margin-left: 5px;
     margin-right: 5px;

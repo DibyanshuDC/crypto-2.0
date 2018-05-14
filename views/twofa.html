@@ -1,8 +1,8 @@
 <div id="wallet" class="container-fluid">
-    <div class="alert-blue margin lighten-5">
+    <div ng-show ="alert"     ng-show="alert"   class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
-            <p class="col no-margin s1 right-align"><i class="fa fa-times"></i></p>
+            <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
         </div>
     </div>
     <div class="row">
@@ -12,10 +12,22 @@
                     <big><strong>Enable 2FA</strong></big>
                 </div>
                 <div class="card-content">
-                    <div class="row">
+                    <div ng-hide="enabled" class="row">
                         <div class="col s12">
-                            <a href="" class="btn blue left">ENABLE 2 FA</a>
+                            <a ng-click="enableBox()" href="" class="btn blue left">ENABLE 2 FA</a>
                         </div>
+                    </div>
+                    <div ng-show="enabled" class="row">
+                        <div class="col s12">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores tempore error voluptatem eaque accusamus odio rerum maxime, illum modi at.
+                            <p>Please provide your number</p>
+                            <div class="input-field">
+                                <span class="prefix"><i class="fa fa-phone-square fa-flip-horizontal"></i></span>
+                                <input id="icon_telephone" type="tel" class="validate">
+                                <label for="icon_telephone">Telephone</label>
+                            </div>
+                        </div>
+                        <a href="" class="btn blue">Submit</a>
                     </div>
                 </div>
             </div>

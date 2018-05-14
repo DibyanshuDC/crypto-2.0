@@ -1,45 +1,55 @@
+<div ng-show="alert" ng-show="alert" class="alert-blue margin valign-wrapper lighten-5 full-width">
+    <div class="row no-margin full-width">
+        <p class="col no-margin s11 center-align"><big><strong>{{success}}</strong></big></p>
+        <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
+    </div>
+</div>
+
+
+
 <div id="login" class="valign-wrapper container-fluid">
     <div class="container-fluid">
         <div class="mx-auto" style="max-width: 420px;">
             <div class="card-panel">
                 <div class="center">
-                    <img src="/logo.png" width="46px" height="46px" alt="">
+                    <img src="images/logo.png" width="46px" height="46px" alt="">
                 </div>
                 <h5 class="center">cryptocentric</h5>
                 <form>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
+                            <input ng-model="email" id="email" type="email" class="validate">
                             <label for="email">Email</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Password</label>
+                            <input ng-model="password" id="password" type="password" class="validate">
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Confirm Password</label>
+                            <input ng-model="password2" id="passwordc" type="password" class="validate">
+                            <label for="passwordc">Confirm Password</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Contact</label>
+                            <input ng-model="contact" id="number" type="text" class="validate">
+                            <label for="number">Contact</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <button class="btn blue full-width" id="login_btn">Register <i class="icon-arrow-right14 position-right"></i></button></div>
+                        <a class="btn blue full-width" ng-click="register()" id="login_btn">Register <i class="icon-arrow-right14 position-right"></i></a>
+                    </div>
 
                     <div class="row">
                         <div class="content-divider text-muted"><span>Already registered?</span></div>
                     </div>
                     <div class="row">
-                        <button href="#!/login" class="btn green full-width" id="login_btn">Login <i class="icon-arrow-right14 position-right"></i></button>
+                        <a ng-href="#!/login" class="btn green full-width" id="login_btn">Login <i class="icon-arrow-right14 position-right"></i></a>
                     </div>
 
                 </form>

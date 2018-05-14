@@ -1,11 +1,361 @@
 <div id="market" class="container-fluid">
-    <div class="alert-blue margin lighten-5">
+    <div ng-show="alert" ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
-            <p class="col no-margin s1 right-align"><i class="fa fa-times"></i></p>
+            <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
         </div>
     </div>
     <div class="row">
+
+        <div class="col s12 m6 trade">
+            <div class="card black">
+                <div class="card-action top">
+                    <div class="flex space-between">
+                        <div class="valign-wrapper">
+                            <big><strong class="white-text">Trade <span class="text-upper">{{marketType}}</span></strong></big>
+                        </div>
+                        <div>
+                            <div class="right align-right"><b style="font-size: 0.7em; color: white; line-height: 1em;">Buy : {{245645}}<br> Sell : {{522745}}</b></div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <big><strong class="white-text">Trading In:</strong></big><br>
+                            <h2 class="white-text margin-sm-ver">BTC</h2>
+                        </div>
+
+                        <div class="col s12 m6 white-text">
+                            <div class="input-field ">
+                                <i class="fa fa-search prefix"></i>
+                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <label for="autocomplete-input">Change Active Coin</label>
+                            </div>
+                        </div>
+                    </div>
+-->
+                </div>
+                <div class="card-content">
+                    <div class="row inputbox">
+                        <div class="col s12 m12 l12 xl6">
+                            <div class="card-panel">
+                                <span class="text-bolder"> Balance :33,688.00</span>
+                                <div class="input-field">
+                                    <input id="email" type="text">
+                                    <label for="email">Volume</label>
+                                    <span class="helper-text" data-success="right">Helper text</span>
+                                </div>
+                                <span class="text-bolder">Lowest Ask :0.00</span>
+                                <div class="input-field">
+                                    <input id="email" type="text">
+                                    <label for="email">Price</label>
+                                    <span class="helper-text" data-success="right">Helper text</span>
+                                </div>
+
+                                <button href="" ng-click="buynow()" class="btn green full-width" id="login_btn">BUY<i class="icon-arrow-right14 position-right"></i></button>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col s12 m12 l12 xl6">
+                            <div class="card-panel">
+                                <span><small class="text-bolder"><span class="text-upper">{{marketType}}</span> Balance :0</small>
+                                </span>
+                                <div class="input-field">
+                                    <input id="email" type="text">
+                                    <label for="email">Volume</label>
+                                    <span class="helper-text" data-success="right">Helper text</span>
+                                </div>
+                                <span><small class="text-bolder">Highest Bid :0.00</small></span>
+                                <div class="input-field">
+                                    <input id="email" type="text">
+                                    <label for="email">Price</label>
+                                    <span class="helper-text" data-success="right">Helper text</span>
+                                </div>
+                                <button href="" ng-click="sellnow()" class="btn green full-width" id="login_btn">SELL<i class="icon-arrow-right14 position-right"></i></button>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card white">
+                <div class="card-action top">
+                    <big><strong>My Pending Orders</strong></big>
+                </div>
+                <div class="card-content">
+                    <table id="" class="table striped highlight">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Volume</th>
+                                <th>Time</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>74</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>33000</td>
+                                <td>500</td>
+                                <td>2018-04-23 18:28:52</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>71</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>1000</td>
+                                <td>20</td>
+                                <td>2018-04-23 13:35:43</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>69</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>120</td>
+                                <td>10</td>
+                                <td>2018-04-23 09:49:03</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>56</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>396</td>
+                                <td>6</td>
+                                <td>2018-04-20 14:09:36</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>55</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>42</td>
+                                <td>6</td>
+                                <td>2018-04-20 14:09:16</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>54</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>1000</td>
+                                <td>1</td>
+                                <td>2018-04-20 12:26:17</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>53</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2018-04-20 11:23:24</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>51</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>2500</td>
+                                <td>50</td>
+                                <td>2018-04-20 07:16:58</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>47</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>40</td>
+                                <td>0.2</td>
+                                <td>2018-04-19 22:15:52</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>46</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>20</td>
+                                <td>0.1</td>
+                                <td>2018-04-19 22:15:04</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>45</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>200</td>
+                                <td>1</td>
+                                <td>2018-04-19 22:14:28</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>43</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>1</td>
+                                <td>100</td>
+                                <td>2018-04-19 15:21:36</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>42</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>100</td>
+                                <td>1</td>
+                                <td>2018-04-19 13:02:39</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>38</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>32</td>
+                                <td>0.004</td>
+                                <td>2018-04-17 11:39:00</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>32</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>70</td>
+                                <td>10</td>
+                                <td>2018-04-13 06:20:42</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>31</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>2018-04-13 02:25:33</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i  class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                            <tr>
+                                <td>30</td>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>0</td>
+                                <td>88</td>
+                                <td>2018-04-13 00:52:12</td>
+                                <td><a ng-click="cancel(3)" class="delete">
+                                                        <i class="fa fa-times"
+                                                           aria-hidden="true"
+                                                           style="color: #797474" title=""
+                                                           data-original-title="Cancel"></i>
+                                                    </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
         <div class="col s12 m6">
             <div class="card white">
                 <div class="card-action top">
@@ -174,330 +524,18 @@
                 </div>
             </div>
         </div>
-        <div class="col s12 m6 trade">
-            <div class="card black">
-                <div class="card-action top">
-                    <big><strong class="white-text">Trade</strong></big>
-                </div>
-                <div class="card-content">
-                    <div class="row inputbox">
-                        <div class="col s12 m12 l12 xl6">
-                            <div class="card-panel">
-                                <span class="text-bolder">USD Balance :33,688.00</span>
-                                <div class="input-field">
-                                    <input id="email" type="text">
-                                    <label for="email">Volume</label>
-                                    <span class="helper-text" data-success="right">Helper text</span>
-                                </div>
-                                <span class="text-bolder">Lowest Ask :0.00</span>
-                                <div class="input-field">
-                                    <input id="email" type="text">
-                                    <label for="email">Price</label>
-                                    <span class="helper-text" data-success="right">Helper text</span>
-                                </div>
 
-                                <button href="" class="btn green full-width" id="login_btn">BUY<i class="icon-arrow-right14 position-right"></i></button>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="col s12 m12 l12 xl6">
-                            <div class="card-panel">
-                                <span><small class="text-bolder">NCA Balance :0</small></span>
-                                <div class="input-field">
-                                    <input id="email" type="text">
-                                    <label for="email">Volume</label>
-                                    <span class="helper-text" data-success="right">Helper text</span>
-                                </div>
-                                <span><small class="text-bolder">Highest Bid :0.00</small></span>
-                                <div class="input-field">
-                                    <input id="email" type="text">
-                                    <label for="email">Price</label>
-                                    <span class="helper-text" data-success="right">Helper text</span>
-                                </div>
-                                <button href="" class="btn green full-width" id="login_btn">SELL<i class="icon-arrow-right14 position-right"></i></button>
-                                <br />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card white">
-                <div class="card-action top">
-                    <big><strong>My Pending Orders</strong></big>
-                </div>
-                <div class="card-content">
-                    <table id="" class="table striped highlight">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Type</th>
-                                <th>Price</th>
-                                <th>Volume</th>
-                                <th>Time</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>74</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>33000</td>
-                                <td>500</td>
-                                <td>2018-04-23 18:28:52</td>
-                                <td><a href="market/74/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>71</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>1000</td>
-                                <td>20</td>
-                                <td>2018-04-23 13:35:43</td>
-                                <td><a href="market/71/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>69</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>120</td>
-                                <td>10</td>
-                                <td>2018-04-23 09:49:03</td>
-                                <td><a href="market/69/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>56</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>396</td>
-                                <td>6</td>
-                                <td>2018-04-20 14:09:36</td>
-                                <td><a href="market/56/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>55</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>42</td>
-                                <td>6</td>
-                                <td>2018-04-20 14:09:16</td>
-                                <td><a href="market/55/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>54</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>1000</td>
-                                <td>1</td>
-                                <td>2018-04-20 12:26:17</td>
-                                <td><a href="market/54/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>53</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td>2018-04-20 11:23:24</td>
-                                <td><a href="market/53/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>51</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>2500</td>
-                                <td>50</td>
-                                <td>2018-04-20 07:16:58</td>
-                                <td><a href="market/51/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>47</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>40</td>
-                                <td>0.2</td>
-                                <td>2018-04-19 22:15:52</td>
-                                <td><a href="market/47/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>46</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>20</td>
-                                <td>0.1</td>
-                                <td>2018-04-19 22:15:04</td>
-                                <td><a href="market/46/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>45</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>200</td>
-                                <td>1</td>
-                                <td>2018-04-19 22:14:28</td>
-                                <td><a href="market/45/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>43</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>1</td>
-                                <td>100</td>
-                                <td>2018-04-19 15:21:36</td>
-                                <td><a href="market/43/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>42</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>100</td>
-                                <td>1</td>
-                                <td>2018-04-19 13:02:39</td>
-                                <td><a href="market/42/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>38</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>32</td>
-                                <td>0.004</td>
-                                <td>2018-04-17 11:39:00</td>
-                                <td><a href="market/38/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>32</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>70</td>
-                                <td>10</td>
-                                <td>2018-04-13 06:20:42</td>
-                                <td><a href="market/32/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>31</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>4</td>
-                                <td>2</td>
-                                <td>2018-04-13 02:25:33</td>
-                                <td><a href="market/31/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                            <tr>
-                                <td>30</td>
-                                <td>
-                                    Bid
-                                </td>
-                                <td>0</td>
-                                <td>88</td>
-                                <td>2018-04-13 00:52:12</td>
-                                <td><a href="market/30/cancel" class="delete">
-                                                        <i data-toggle="tooltip" class="fa fa-times"
-                                                           aria-hidden="true"
-                                                           style="color: #797474" title=""
-                                                           data-original-title="Cancel"></i>
-                                                    </a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+    </div>
+</div>
 
-                </div>
-            </div>
-        </div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Are You sure</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect red btn-flat left">DIsagree</a>
+        <a href="#!" class="modal-close waves-effect blue btn-flat right">Agree</a>
     </div>
 </div>
