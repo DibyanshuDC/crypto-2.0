@@ -32,35 +32,26 @@ angular.module('cryptoCentric')
                     }
                 })
                 .then(function (token_response) {
+                        localStorage.setItem("token", token_response.data.access_token);
                         $http({
                                 url: cons.bs.am + "ms_oauth/resources/userprofile/me",
                                 method: "GET",
                                 headers: {
-                                    "Authorization": token_response.data.access_token
+                                    "Authorization": 'Bearer ' + token_response.data.access_token
                                 }
                             })
                             .then(function (response) {
-                                // Store
-                                console.log(response);
-                                localStorage.setItem("token", token_response.data.access_token);
                                 localStorage.setItem("username", response.data.uid.split('@')[0]);
-
-
                                 $http({
-                                    url: cons.bs.im + 'idaas/im/scim/v1/Users?attributes=id&filter=(emails.value eq ' + $scope.email + ')',
+                                    url: cons.bs.im + 'idaas/im/scim/v1/Users?attributes=id&filter=(userName eq ' + $scope.email + ')',
                                     method: "GET",
                                     headers: {
-                                        "Authorization": token_response.data.access_token
+                                        "Authorization": 'Bearer ' + token_response.data.access_token
                                     }
                                 }).then(function (response) {
-                                    localStorage.setItem("userkey", response.data);
+                                    localStorage.setItem("userkey", response.data.Resources[0].id);
                                     $window.location.href = '/#!/dashboard';
-
                                 });
-
-
-
-
                             });
                     },
                     function (e) {

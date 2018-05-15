@@ -41,8 +41,7 @@ angular.module('cryptoCentric')
 
 
         $scope.logout = function () {
-            localStorage.removeItem("token");
-            localStorage.removeItem("username");
+            localStorage.clear();
             $window.location.href = '/';
         };
 

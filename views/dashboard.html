@@ -8,123 +8,128 @@
     <div class="row">
         <div class="col s12 m6">
             <div class="card-panel white">
-                <div class="card-header">
-                    <h5>Latest Orders</h5>
+                <div ng-show="latestOrders.length">
+                    <div class="card-header">
+                        <h5>My Recent Orders</h5>
+                    </div>
+                    <hr>
+                    <br>
+                    <table id="" class="table responsive-table highlight">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Market</th>
+                                <th>Price</th>
+                                <th>Volume</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Pending
+                                </td>
+                                <td>
+                                    NCA USD
+                                </td>
+                                <td>33000</td>
+                                <td>500</td>
+                                <td>2018-04-23 18:28:52</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Cancelled
+                                </td>
+                                <td>
+                                    XRP USD
+                                </td>
+                                <td>25</td>
+                                <td>5</td>
+                                <td>2018-04-23 18:24:11</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Pending
+                                </td>
+                                <td>
+                                    XRP USD
+                                </td>
+                                <td>1000</td>
+                                <td>1000</td>
+                                <td>2018-04-23 15:28:55</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Pending
+                                </td>
+                                <td>
+                                    NCA USD
+                                </td>
+                                <td>1000</td>
+                                <td>20</td>
+                                <td>2018-04-23 13:35:43</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Cancelled
+                                </td>
+                                <td>
+                                    XRP USD
+                                </td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>2018-04-23 11:10:32</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Approved
+                                </td>
+                                <td>
+                                    NCA USD
+                                </td>
+                                <td>1000</td>
+                                <td>20</td>
+                                <td>2018-04-23 13:35:43</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Bid
+                                </td>
+                                <td>
+                                    Approved
+                                </td>
+                                <td>
+                                    NCA USD
+                                </td>
+                                <td>1000</td>
+                                <td>20</td>
+                                <td>2018-04-23 13:35:43</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <hr>
-                <br>
-                <table id="" class="table responsive-table highlight">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Market</th>
-                            <th>Price</th>
-                            <th>Volume</th>
-                            <th>Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                            <td>
-                                NCA USD
-                            </td>
-                            <td>33000</td>
-                            <td>500</td>
-                            <td>2018-04-23 18:28:52</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Cancelled
-                            </td>
-                            <td>
-                                XRP USD
-                            </td>
-                            <td>25</td>
-                            <td>5</td>
-                            <td>2018-04-23 18:24:11</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                            <td>
-                                XRP USD
-                            </td>
-                            <td>1000</td>
-                            <td>1000</td>
-                            <td>2018-04-23 15:28:55</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                            <td>
-                                NCA USD
-                            </td>
-                            <td>1000</td>
-                            <td>20</td>
-                            <td>2018-04-23 13:35:43</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Cancelled
-                            </td>
-                            <td>
-                                XRP USD
-                            </td>
-                            <td>8</td>
-                            <td>8</td>
-                            <td>2018-04-23 11:10:32</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                            <td>
-                                NCA USD
-                            </td>
-                            <td>1000</td>
-                            <td>20</td>
-                            <td>2018-04-23 13:35:43</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Bid
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                            <td>
-                                NCA USD
-                            </td>
-                            <td>1000</td>
-                            <td>20</td>
-                            <td>2018-04-23 13:35:43</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="min-height: 50vh" ng-hide="latestOrders.length" class="valign-wrapper">
+                    <h5 class="center full-width">You don't have any recent orders. Try placing one !!</h5>
+                </div>
             </div>
         </div>
         <div class="col s12 m6">
