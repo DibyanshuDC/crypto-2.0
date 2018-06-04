@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('cryptoCentric')
-    .controller('WalletsCtrl', function ($scope, $routeParams, $location) {
+    .controller('WalletsCtrl', function ($scope, $http, cons, $routeParams, $location, $filter) {
 
-
-        $scope.alert = true;
+        var token = localStorage.getItem("token");
+        var userkey = localStorage.getItem("userkey")
+        $scope.alert = false;
 
 
 
@@ -16,73 +17,59 @@ angular.module('cryptoCentric')
         $scope.depositData = {};
         $scope.withdrawData = {};
 
-        //        var rowval = document.querySelector('#rowval');
-        //        var payOption = document.querySelector('#payOption');
-        //        var wthTo = document.querySelector('#wthTo');
-        //        var wthIn = document.querySelector('#wthIn');
-        //
-        //        var rowvalIn = M.FormSelect.init(rowval, {});
-        //        var payOptionIn = M.FormSelect.init(payOption, {});
-        //        var wthToIn = M.FormSelect.init(wthTo, {});
-        //        var wthInIn = M.FormSelect.init(wthIn, {});
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //
-        //        var tab_elem = document.querySelector(".tabs");
-        //        var tabs = M.Tabs.init(tab_elem, {});
-
-
 
 
         $scope.cancel = function () {
             $scope.depositbox = false;
             $scope.withdrawbox = false;
+            $scope.sendbox = false;
             $scope.transbox = true;
             M.AutoInit();
-        }
+        };
+
         $scope.wallets = [{
-            id: "usd",
-            type: "currency",
-            bal: '34,2000.00',
-            locked: '8000'
-        }, {
-            id: "btc",
-            type: "coin",
-            bal: '32000',
-            locked: '8000'
-        }, {
-            id: "eth",
-            type: "coin",
-            bal: '32000',
-            locked: '8000'
-        }, {
-            id: "ltc",
-            type: "coin",
-            bal: '32000',
-            locked: '8000'
-        }, {
-            id: "lisk",
-            type: "coin",
-            bal: '32000',
-            locked: '8000'
-        }, {
-            id: "some",
-            type: "coin",
-            bal: '32000',
-            locked: '8000'
+            id: ' ',
+            type: ' ',
+            bal: ' ',
+            locked: ' '
         }];
+
+
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/wallets?usr_key=' + userkey + '&access_token=' + token,
+            method: "GET"
+        }).then(function (response) {
+            $scope.wallets = response.data;
+
+            $scope.selectedWallet = $filter('filter')($scope.wallets, {
+                id: $scope.walletName
+            })[0];
+
+
+            $http({
+                url: cons.bs.o + 'DBOperations/rest/UserService/fetch/wallet/' + $scope.selectedWallet.name + '?usr_key=' + userkey + '&access_token=' + token,
+                method: "GET"
+            }).then(function (response) {
+                $scope.myWalletData = response.data;
+                M.updateTextFields();
+            });
+
+
+        });
+
+
 
         $scope.cancel();
 
         $scope.deposit = function () {
             $scope.depositbox = true;
             $scope.withdrawbox = false;
+            $scope.transbox = false;
+            M.AutoInit();
+        };
+
+        $scope.send = function () {
+            $scope.sendbox = true;
             $scope.transbox = false;
             M.AutoInit();
         };
@@ -102,11 +89,28 @@ angular.module('cryptoCentric')
 
         };
 
-        //        $scope.changeWallet = function (item) {
-        //            $location.path("/wallet/" + item);
-        //        };
 
 
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
+            method: "GET"
+        }).then(function (response) {
+            $scope.deposithistory = response.data;
+        });
 
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
+            method: "GET"
+        }).then(function (response) {
+            $scope.withdrawhistory = response.data;
+        });
+
+
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
+            method: "GET"
+        }).then(function (response) {
+            $scope.myAccs = response.data;
+        });
 
     });

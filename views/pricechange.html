@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="card-panel white">
+        <table class="table centered striped bordered">
+            <thead>
+                <tr>
+                    <th><b>Time</b></th>
+                    <th><b>Coinspot-api</b></th>
+                    <th><b>Coinspot-web</b></th>
+                    <th><b>Bittrex-price</b></th>
+                    <th><b>Binance-price</b></th>
+                </tr>
+            </thead>
+            <tbody class="order_book" id="buy_orders">
+                <!-- ngRepeat: order in openSell -->
+                <tr ng-repeat="item in openSell">
+                    <td>{{item.DateTime | date}}</td>
+                    <td>{{item.CoinspotAPI}}</td>
+                    <td>{{item.coinspotWeb}}</td>
+                    <td>{{item.Bittrexprice}}</td>
+                    <td>{{item.Binanceprice}}</td>
+                </tr>
+                <!-- end ngRepeat: order in openSell -->
+            </tbody>
+        </table>
+    </div>
+</div>

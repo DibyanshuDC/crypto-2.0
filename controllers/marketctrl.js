@@ -1,95 +1,243 @@
 'use strict';
 
 angular.module('cryptoCentric')
-    .controller('MarketCtrl', function ($scope, $routeParams, cons, $http) {
+    .controller('MarketCtrl', function ($scope, $routeParams, cons, $window, $http) {
         $scope.marketType = $routeParams.type;
+        $scope.coinsymbol = $routeParams.symbol;
+
+        var token = localStorage.getItem("token");
+        var userkey = localStorage.getItem("userkey");
+        var useremail = localStorage.getItem("useremail");
 
         M.AutoInit();
+
         $scope.alert = false;
 
+        $scope.coinBAmount = 1;
+        $scope.coinSAmount = 1;
 
-        $http.get(cons.bs.m + 'buyOrderbuySellRate?coinname=' + $scope.marketType + '&eprice=max')
+        $scope.coinBAmountChange = function () {
+            $scope.tradeBAmount = $scope.buyPrice * $scope.coinBAmount;
+        }
+
+        $scope.coinSAmountChange = function () {
+            $scope.tradeSAmount = $scope.sellPrice * $scope.coinSAmount;
+        }
+
+
+        $scope.tradeBAmountChange = function () {
+            $scope.coinBAmount = $scope.tradeBAmount / $scope.buyPrice;
+        };
+
+        $scope.tradeSAmountChange = function () {
+            $scope.coinSAmount = $scope.tradeSAmount / $scope.sellPrice;
+        };
+
+
+        $http.get(cons.bs.m + 'buySellRate?coinname=' + $scope.marketType + '&eprice=min').then(function (response) {
+            // success
+            $scope.buyPrice = response.data.price;
+            $scope.tradeBAmount = $scope.buyPrice * $scope.coinBAmount;
+            M.updateTextFields();
+        });
+
+        $http.get(cons.bs.m + 'buySellRate?coinname=' + $scope.marketType + '&eprice=max').then(function (response) {
+            // success
+            $scope.sellPrice = response.data.price;
+            $scope.tradeSAmount = $scope.sellPrice * $scope.coinSAmount;
+            M.updateTextFields();
+        });
+
+
+        $http({
+            url: cons.bs.m + 'openSellOrders',
+            method: "GET",
+            headers: {
+                'Content-Type': "application/json"
+            },
+        }).then(function (response) {
+                // success
+                $scope.openSell = response.data;
+            },
+            function (error) { // optional
+                // failed
+                alert("Errors !");
+            });
+
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/tradehistory?usr_key=' + userkey + '&access_token=' + token,
+            method: "GET"
+        }).then(function (response) {
+                // success
+                $scope.pendingOrders = response.data;
+            },
+            function (error) { // optional
+                // failed
+                alert("Errors !");
+            });
+
+
+        $http({
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/pending/orders?usr_key=' + userkey + '&access_token=' + token + '&coinname=' + $scope.marketType,
+            method: "GET"
+        }).then(function (response) {
+                // success
+                $scope.pendingOrders = response.data;
+            },
+            function (error) { // optional
+                // failed
+                alert("Errors !");
+            });
+
+
+
+
+
+        M.updateTextFields();
+
 
 
 
         $scope.buynow = function () {
 
-            var buydata = {
-                "transactionID": "6e14f23b-92c0-4dec-be9b-df375b759d64",
-                "usr_key": "100",
-                "wallet address": "miKNL2BkjZfT5BzyEQjUYjg8u7wxEKrewDs",
-                "quantity": "2",
-                "coinname": "Bitcoin",
-                "userid": "rogercharlie@gmail.com"
+            var tradeData = {
+                "USR_KEY": userkey,
+                "USER_ID": useremail,
+                "COINS_VOL": $scope.coinBAmount,
+                "COINNAME": $scope.marketType,
+                "TYPE": "buy",
+                "STATUS": "Pending",
+                "MARKET": $scope.coinsymbol.toUpperCase() + '/AUD',
+                "ACCESS_TOKEN": token
             }
 
 
+
             $http({
-                url: cons.bs.m + 'buyOrder',
-                method: "POST",
-                data: buydata,
-                headers: {
-                    'Content-Type': "application/json"
-                },
-            }).then(function (response) {
-                    // success
-                    $scope.success = response.data;
-                    $scope.alert = true;
-                    setTimeout(function () {
-                        $window.location.href = '#!orders';
-                    }, 5000);
+                    url: cons.bs.o + 'DBOperations/rest/UserService/insert/buytrade',
+                    method: "POST",
+                    data: tradeData,
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                })
+                .then(function (response) {
 
-                },
-                function (error) { // optional
-                    // failed
-                    alert("Errors in the fields !");
+
+                    var buydata = {
+                        "transactionID": response.data.txnid,
+                        "usr_key": userkey,
+                        "wallet address": response.data.addr,
+                        "quantity": $scope.coinBAmount,
+                        "coinname": $scope.marketType,
+                        "userid": useremail
+                    }
+
+
+                    $http({
+                        url: cons.bs.m + 'buyOrder',
+                        method: "POST",
+                        data: buydata,
+                        headers: {
+                            'Content-Type': "application/json"
+                        },
+                    }).then(function (response) {
+                            // success
+                            $scope.success = "Succesfully Placed";
+                            $scope.alert = true;
+                        },
+                        function (error) { // optional
+                            // failed
+                            alert("Errors in the fields !");
+                        });
+
                 });
-        };
 
+
+
+        };
 
 
 
         $scope.sellnow = function () {
 
-            var selldata = {
-                "transactionID": "9e363f67-272e-40a0-b432-dfec325a5ea1",
-                "usr_key": "100",
-                "walletaddress": "rwehgerh43tl4n3ltjkntkjnkj",
-                "quantity": "4",
-                "coinname": "Bitcoin",
-                "userid": "RogerCharlie123@gmail.com"
+            var tradeData = {
+                "USR_KEY": userkey,
+                "USER_ID": useremail,
+                "COINS_VOL": $scope.coinSAmount,
+                "COINNAME": $scope.marketType,
+                "TYPE": "sell",
+                "STATUS": "Pending",
+                "MARKET": $scope.coinsymbol.toUpperCase() + '/AUD',
+                "ACCESS_TOKEN": token
             }
 
 
-            $http({
-                url: cons.bs.m + 'sellOrder',
-                method: "POST",
-                data: selldata,
-                headers: {
-                    'Authorization': 'Basic eGVsc3lzYWRtOldlbGNvbWUx',
-                    'Content-Type': "application/scim+json"
-                },
-            }).then(function (response) {
-                    // success
-                    $scope.success = "success";
-                    $scope.alert = true;
-                    setTimeout(function () {
-                        $window.location.href = '#!login';
-                    }, 5000);
 
-                },
-                function (error) { // optional
-                    // failed
-                    alert("Errors in the fields !");
+            $http({
+                    url: cons.bs.o + 'DBOperations/rest/UserService/insert/selltrade',
+                    method: "POST",
+                    data: tradeData,
+                    headers: {
+                        'Content-Type': "application/json"
+                    },
+                })
+                .then(function (response) {
+
+
+                    var selldata = {
+                        "transactionID": response.data.txnid,
+                        "usr_key": userkey,
+                        "wallet address": response.data.addr,
+                        "quantity": $scope.coinSAmount,
+                        "coinname": $scope.marketType,
+                        "userid": useremail
+                    }
+
+
+                    $http({
+                        url: cons.bs.m + 'sellOrder',
+                        method: "POST",
+                        data: selldata,
+                        headers: {
+                            'Content-Type': "application/json"
+                        },
+                    }).then(function (response) {
+                            // success
+                            $scope.success = "Succesfully Placed";
+                            $scope.alert = true;
+                            $window.location.href = '#!orders';
+                        },
+                        function (error) { // optional
+                            // failed
+                            alert("Errors in the fields !");
+                        });
+
                 });
+
+
+
         };
 
 
-        $scope.cancel = function (index) {
-            console.log(index);
+
+
+        $scope.deleteOrder = function (order) {
+            $scope.modalInfo = {
+                "text_dsc": "Are you sure you want to delete " + order.id + " ?",
+                "buttons": [{
+                    text: "Cancel",
+                    class: "gray margin-sm "
+                }, {
+                    text: "Confirm",
+                    class: "red margin-sm "
+                }]
+
+            }
             //show a popup
-            var instance = M.Modal.getInstance("modal1");
+            var elem = document.querySelector('#modal1');
+            var instance = M.Modal.getInstance(elem);
             instance.open();
-        }
+        };
 
     });

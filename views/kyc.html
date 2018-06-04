@@ -241,7 +241,9 @@
                             <article ng-if="progress==2">
                                 <br><br>
                                 <div class="row">
-                                    <h5 class="red-text center"> We follow a strict 100 point check !! Your current score is {{score}} points.</h5>
+                                    <h5 ng-show="(score < 100)" class="red-text center"> We follow a strict 100 point check !! You need <span class="text-bolder">{{100-score}}</span> more points to pass this step.</h5>
+                                    <h5 ng-show="(score >= 100)" class="green-text center"> We follow a strict 100 point check !! Your score is <span class="text-bolder">{{score}}</span>.</h5>
+
                                     <div class="col s12 m6">
                                         <div class="input-group">
                                             <label for="kycname">Full Name:</label>
@@ -254,13 +256,13 @@
                                             <input type="text" class="form-control" id="kycadd">
                                         </div>
                                     </div>
-                                    <div ng-repeat="n in supportdocs">
+                                    <div ng-repeat="item in userdocs track by $index">
                                         <div class="col s12 m6">
                                             <div class="input-group">
                                                 <label>ID Type:</label>
-                                                <select class="browser-default" ng-model="sdocs" ng-change="updateDocs(sdocs)">
-                                                    <option value="" disabled selected>Document Type</option>
-                                                    <option ng-repeat="options in docs" value="options.value">{{options.idType}}</option>
+                                                <select class="browser-default" ng-model="userdocs[$index]" ng-change="updateDocs($index)">
+                                                    <option value=0 disabled>Choose a type</option>
+                                                    <option ng-repeat="option in supported_docs" value="{{option.idType}}" ng-disabled="{{userdocs.includes(option.idType)}}">{{option.name}}</option>
                                                 </select>
                                             </div>
                                         </div>

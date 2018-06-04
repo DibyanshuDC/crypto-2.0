@@ -33,7 +33,7 @@
                         <a ng-href="#!/wallet/{{item.id}}">
                             <div class="flex">
                                 <div class="wallet-icon blue-text margin-sm-horiz"><i class="fa fa-envelope"></i></div>
-                                <p class="text-bolder"><big class="text-normal"><span class="text-upper">{{item.id}}</span> Wallet</big><br>Balance: {{item.bal}}<br>Locked: {{item.locked}}
+                                <p class="text-bolder"><big class="text-normal"><span class="text-upper">{{item.id}}</span> Wallet</big><br>Balance: {{item.bal}}<br>Locked: {{0}}
                                 </p>
                             </div>
                         </a>
@@ -47,7 +47,9 @@
                     <div class="margin-sm-ver">
                         <big><span class="text-upper">{{walletName}}</span> {{action ? action : 'Wallet'}} </big>
                         <span class="right valign-wrapper">
-                        <a ng-click="deposit()" class="waves-effect waves-light btn margin-sm-horiz">Deposit</a> <a ng-click="withdraw()" class="waves-effect waves-light btn ">Withdraw</a>
+                        <a ng-if="selectedWallet.type!='coin'" ng-click="deposit()" class="waves-effect waves-light btn margin-sm-horiz">Deposit</a> 
+                        <a ng-if="selectedWallet.type!='coin'" ng-click="withdraw()" class="waves-effect waves-light btn ">Withdraw</a>
+                        <a ng-if="selectedWallet.type=='coin'" ng-if="selectedWallet.type=='coin'" ng-click="send()" class="waves-effect waves-light btn ">Transfer</a>
                         </span>
                     </div>
                 </div>
@@ -95,144 +97,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>2018-04-20 05:04:45</td>
-                                            <td>10000</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>2018-04-20 05:03:49</td>
-                                            <td>100000</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>2018-04-17 11:02:08</td>
-                                            <td>10</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>2018-04-16 13:20:40</td>
-                                            <td>100</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>2018-04-14 17:33:24</td>
-                                            <td>11111</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>2018-04-14 17:33:00</td>
-                                            <td>12222</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>2018-04-13 02:26:25</td>
-                                            <td>1111111</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/deposit/5/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                            </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>2018-04-11 22:01:43</td>
-                                            <td>500</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/deposit/4/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                        </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>2018-04-10 23:14:42</td>
-                                            <td>10</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Processing
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2018-04-10 14:48:48</td>
-                                            <td>100</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/deposit/2/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                        </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2018-04-04 21:02:04</td>
-                                            <td>2000</td>
-                                            <td>
-                                                -
-                                            </td>
-                                            <td>
-                                                Done
-                                            </td>
+                                        <tr ng-repeat="order in deposithistory">
+                                            <td>{{$index}}</td>
+                                            <td>{{order.date}}</td>
+                                            <td>{{order.amt}}</td>
+                                            <td>{{order.from}}</td>
+                                            <td>{{order.status}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -246,126 +116,22 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Time</th>
-                                            <th>Account</th>
+                                            <th>Account To</th>
                                             <th>Amount</th>
                                             <th>Fees</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>9</td>
-                                            <td>2018-04-23 17:08:10</td>
+                                        <tr ng-repeat="order in withdrawhistory">
+                                            <td>{{$index}}</td>
+                                            <td>{{order.time}}</td>
                                             <td>
-                                                ETH (asdasdasd- asdasdasd)
+                                                ETH
                                             </td>
-                                            <td>9900</td>
-                                            <td>100</td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td>2018-04-23 09:48:29</td>
-                                            <td>
-                                                ETH (asdasdasd- asdasdasd)
-                                            </td>
-                                            <td>990</td>
-                                            <td>10</td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>2018-04-23 01:15:56</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>100</td>
-                                            <td>0</td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/withdrawal/6/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                        </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>2018-04-22 20:31:45</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>1</td>
-                                            <td>0</td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/withdrawal/5/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                        </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>2018-04-20 20:08:57</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>100</td>
-                                            <td>0</td>
-                                            <td>
-                                                Pending
-                                                <a href="wallet/withdrawal/4/cancel" class="delete">
-                                                            <i data-toggle="tooltip" class="fa fa-times"
-                                                               aria-hidden="true"
-                                                               style="color: #797474" title=""
-                                                               data-original-title="Cancel"></i>
-                                                        </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>2018-04-16 21:27:59</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>10</td>
-                                            <td>0</td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>2018-04-16 07:01:18</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>100</td>
-                                            <td>0</td>
-                                            <td>
-                                                Done
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>2018-04-12 12:31:59</td>
-                                            <td>
-                                                ETH (dsf- dfasrqe114141)
-                                            </td>
-                                            <td>10</td>
-                                            <td>0</td>
-                                            <td>
-                                                Cancelled
-                                            </td>
+                                            <td>{{order.amount}}</td>
+                                            <td>{{order.fees}}</td>
+                                            <td>{{order.status}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -374,63 +140,97 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-content" ng-if="depositbox">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <select id="payOption" class="browser-default">
+                <div ng-if="selectedWallet.type!='coin'">
+                    <div class="card-content" ng-if="depositbox">
+                        <div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select id="payOption" class="browser-default">
                               <option value="" selected>Choose Payment Method</option>
                               <option value="1">DEBITCARD</option>
                               <option value="2">PAYPAL</option>
                               <option value="3">STRIPE</option>
                             </select>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="input_text" type="text" data-length="10">
-                            <label for="input_text">Amount</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="input_text" type="text" disabled data-length="10">
-                            <label for="input_text">Fees</label>
-                        </div>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="input_text" type="text" data-length="10">
+                                    <label for="input_text">Amount</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="input_text" type="text" disabled data-length="10">
+                                    <label for="input_text">Fees</label>
+                                </div>
 
+                            </div>
+                            <div class="row">
+                                <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="DEPOSIT()" class="btn right blue">Deposit</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="DEPOSIT()" class="btn right blue">Deposit</a>
-                    </div>
-                </div>
-                <div class="card-content" ng-if="withdrawbox">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <select id="wthIn" class="browser-default">
+                    <div class="card-content" ng-if="withdrawbox">
+                        <div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select id="wthIn" class="browser-default">
                               <option value="" selected>Choose your Method</option>
                               <option value="1">ETHERS</option>
                               <option value="2">BITCOIN</option>
                             </select>
 
-                        </div>
-                        <div class="input-field col s6">
-                            <select id="wthTo" class="browser-default">
+                                </div>
+                                <div class="input-field col s6">
+                                    <select id="wthTo" class="browser-default">
                                 <option value="" disabled selected>Choose your Bank</option>
-                                <option value="1">AXIS</option>
-                                <option value="2">ICICI</option>
-                                <option value="3">NG</option>
+                                <option ng-repeat="acc in myAccs  | filter: { 'status' : 'Active'}" value="{{acc.account_number}}">{{acc.bank_name+':  '+acc.account_number}}</option>
+                                
                              </select>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="input_text" type="text" data-length="10">
-                            <label for="input_text">Amount</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="input_text" type="text" disabled data-length="10">
-                            <label for="input_text">Fee</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input id="input_text" disabled type="text" data-length="10">
-                            <label for="input_text">Total</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="input_text" type="text" data-length="10">
+                                    <label for="input_text">Amount</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="input_text" type="text" disabled data-length="10">
+                                    <label for="input_text">Fee</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="input_text" disabled type="text" data-length="10">
+                                    <label for="input_text">Total</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="WITHDRAW()" class="btn right blue">Withdraw</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="WITHDRAW()" class="btn right blue">Withdraw</a>
+                </div>
+                <div ng-if="selectedWallet.type=='coin'">
+                    <div class="card-content" ng-if="sendbox">
+
+                        <p>Your Wallet Address</p>
+                        <hr>
+                        <div class="row">
+                            <div class="input-field col s9">
+                                <input text-bolder text-black disabled autofocus id="inputwalladd" value="{{myWalletData[0].wallet_addr}}" type="text">
+                            </div>
+                            <br><br>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="input-field col s9">
+                                <input id="input_text" type="text">
+                                <label for="input_text">Reciever's Address</label>
+                            </div>
+                            <div class="input-field col s3">
+                                <input id="input_text" type="text" data-length="10">
+                                <label for="input_text">Coin Amount</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a ng-click="cancel()" class="btn left pink">Cancel</a><a ng-click="TRANSFER()" class="btn right blue">SEND</a>
+                        </div>
                     </div>
                 </div>
 

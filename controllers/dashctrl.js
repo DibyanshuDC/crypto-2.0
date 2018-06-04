@@ -14,4 +14,13 @@ angular.module('cryptoCentric')
             $scope.latestOrders = response.data;
         });
 
+
+
+        $http({
+            url: cons.bs.m + 'exchange?start=' + '0' + '&limit=' + '200',
+            method: "GET"
+        }).then(function (response) {
+            $scope.coins = response.data;
+        });
+
     });

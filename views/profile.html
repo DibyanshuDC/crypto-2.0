@@ -1,5 +1,5 @@
 <div id="wallet" class="container-fluid">
-    <div ng-show ="alert"     ng-show="alert"   class="alert-blue margin lighten-5">
+    <div ng-show="alert" ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
             <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
@@ -16,68 +16,59 @@
                         <div class="row">
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="fname" type="text" class="validate">
+                                    <input autofocus id="fname" type="text" ng-model="profile.name.givenName" class="validate">
                                     <label for="fname">First Name</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="lname" type="text" class="validate">
+                                    <input autofocus id="lname" type="text" ng-model="profile.name.familyName" class="validate">
                                     <label for="lname">Last Name</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <p>Gender <br><br> </p>
-                                    <p>
-                                        <label>
-                                      <input class="with-gap" name="group3" type="radio" checked />
-                                      <span>Male</span>
-                                    </label>
-                                        <label>
-                                      <input class="with-gap" name="group3" type="radio" checked />
-                                      <span>Female</span>
-                                    </label>
-                                        <label>
-                                      <input class="with-gap" name="group3" type="radio" checked />
-                                      <span>Others</span>
-                                    </label>
-                                    </p>
+                                    <select id="payOption" ng-model="profile['urn:ietf:params:scim:schemas:extension:oracle:2.0:OIG:User'].Gender" class="browser-default">
+                                      <option value="" disabled>Choose Your Gender</option>
+                                      <option value="Male">MALE</option>
+                                      <option value="Female">FEMALE</option>
+                                      <option value="Unspecified">UNSPECIFIED</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="dob" type="text" class="validate">
+                                    <input autofocus id="dob" ng-model="profile['urn:ietf:params:scim:schemas:extension:oracle:2.0:OIG:User'].DateOfBirth" type="text" class="validate">
                                     <label for="dob">Date of Birth</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="country" type="text" class="validate">
+                                    <input autofocus id="country" ng-model="profile.addresses[0].country" type="text" class="validate">
                                     <label for="country">Country</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="City" type="text" class="validate">
+                                    <input autofocus id="City" type="text" ng-model="profile['urn:ietf:params:scim:schemas:extension:oracle:2.0:OIG:User'].City" class="validate">
                                     <label for="City">City</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="Address" type="text" class="validate">
+                                    <input autofocus id="Address" type="text" ng-model="profile['urn:ietf:params:scim:schemas:extension:oracle:2.0:OIG:User'].AddressLine1" class="validate">
                                     <label for="Address">Address</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="Phone" type="text" class="validate">
+                                    <input autofocus id="Phone" type="text" ng-model="profile.phoneNumbers[0].value" class="validate">
                                     <label for="Phone">Primary Phone</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
@@ -85,34 +76,34 @@
                             <div class="col s12 m6">
                                 <div class="input-field">
                                     <div class="input-field">
-                                        <input disabled value="somestory@some.in" id="disabled" type="text" class="validate">
+                                        <input autofocus disabled ng-model="profile.emails[0].value" id="disabled" type="text" class="validate">
                                         <span class="helper-text">Registered Email</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="Password" type="password">
+                                    <input autofocus id="Password" type="password">
                                     <label for="Password">Current Password</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="NWPassword" type="password">
+                                    <input autofocus id="NWPassword" type="password">
                                     <label for="NWPassword">New Password</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12 m6">
                                 <div class="input-field">
-                                    <input id="cNWPassword" type="password">
+                                    <input autofocus id="cNWPassword" type="password">
                                     <label for="cNWPassword">Repeat Password</label>
                                     <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
                                 </div>
                             </div>
                             <div class="col s12">
-                                <div class="row"><a href="" class="btn grey left">Cancel</a><a href="" class="btn blue right">Save</a></div>
+                                <div class="row"><a href="" class="btn grey left">Cancel</a><a ng-click="test()" class="btn blue right">Save</a></div>
                             </div>
                         </div>
                     </form>

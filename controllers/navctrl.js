@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cryptoCentric')
-    .controller('NavCtrl', function ($scope, $location, $window) {
+    .controller('NavCtrl', function ($scope, $http, cons, $location, $window) {
 
         var token;
         $scope.userName = "";
@@ -10,9 +10,12 @@ angular.module('cryptoCentric')
 
         $scope.$watch('loggedin', function () {
             if ($scope.loggedin) {
-                $window.location.href = '/#!/dashboard';
-                $scope.userName = localStorage.getItem("username");
-                //$location.url("/dashboard");
+                $scope.userName = localStorage.getItem("name");
+                if ($scope.userName) {
+                    $window.location.href = '/#!/dashboard';
+                } else {
+                    $window.location.href = '/#!/user/profile';
+                }
             } else {
 
                 $window.location.href = '/#!/';
@@ -27,8 +30,8 @@ angular.module('cryptoCentric')
                 token = localStorage.getItem("token");
                 // verify token
                 if (token) {
+                    $scope.userName = localStorage.getItem("name");
                     $scope.loggedin = true;
-                    $scope.userName = localStorage.getItem("username");
                 }
 
             } else {
@@ -37,6 +40,13 @@ angular.module('cryptoCentric')
         }
 
         verifytoken();
+
+        $http({
+            url: cons.bs.m + 'exchange?start=' + '0' + '&limit=' + '5',
+            method: "GET"
+        }).then(function (response) {
+            $scope.coins = response.data;
+        });
 
 
 
@@ -96,7 +106,7 @@ angular.module('cryptoCentric')
                 title: 'Dashboard'
             },
             {
-                path: '/wallet/usd',
+                path: '/wallet/aud',
                 title: 'Wallets'
             },
             {
@@ -104,7 +114,7 @@ angular.module('cryptoCentric')
                 title: 'Orders'
             },
             {
-                path: '/market/btc',
+                path: '/market/Bitcoin/btc',
                 title: 'Markets'
             },
             {

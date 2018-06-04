@@ -24,7 +24,7 @@ angular.module('cryptoCentric')
 
 
         $http({
-            url: cons.bs.m + 'exchange',
+            url: cons.bs.m + 'exchange?start=' + '0' + '&limit=' + '10',
             method: "GET"
         }).then(function (response) {
             $scope.coins = response.data;

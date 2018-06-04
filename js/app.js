@@ -47,7 +47,7 @@ var app = angular.module("cryptoCentric", ["ngRoute", "vcRecaptcha"])
             templateUrl: "views/wallets.html",
             controller: "WalletsCtrl"
         }).
-        when("/market/:type", {
+        when("/market/:type/:symbol", {
             templateUrl: "views/market.html",
             controller: "MarketCtrl"
         }).
@@ -66,6 +66,10 @@ var app = angular.module("cryptoCentric", ["ngRoute", "vcRecaptcha"])
         when("/:username/twofa", {
             templateUrl: "views/twofa.html",
             controller: "TwoFACtrl"
+        }).
+        when("/pricechange/:coin", {
+            templateUrl: "views/pricechange.html",
+            controller: "PriceChangeCtrl"
         }).
         otherwise({
             redirectTo: "/"

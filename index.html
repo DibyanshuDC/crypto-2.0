@@ -14,6 +14,7 @@
 <meta http-equiv="Cache-control" content="public">-->
 <!-- Style-->
 <link rel="stylesheet" href="css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
 <link rel="stylesheet" href="css/helper.css">
 <link rel="stylesheet" href="css/style.css">
@@ -41,9 +42,9 @@
                                 <a class='valign-wrapper'><img class="circle" src="6.jpg" alt=""><span class="userName">{{userName}}</span><i class="fa fa-caret-down"></i></a>
                             </div>
                             <ul id='useroptions' class='dropdown-content black-text'>
-                                <li><a href="#!/sunny/profile">Profile</a></li>
-                                <li><a href="#!/sunny/kyc">KYC</a></li>
-                                <li><a href="#!/sunny/twofa">TWO FA</a></li>
+                                <li><a href="#!/{{userName}}/profile">Profile</a></li>
+                                <li><a href="#!/{{userName}}/kyc">KYC</a></li>
+                                <li><a href="#!/{{userName}}/twofa">TWO FA</a></li>
                                 <li><a ng-click="logout()" href="#!"><i class="fa fa-power-off"></i>Logout</a></li>
                             </ul>
                         </div>
@@ -61,11 +62,11 @@
                 <div>
                     <ul id="showMobMenu" class='dropdown-content'>
                         <li><a href="/">Dashboard</a></li>
-                        <li><a href="#!/wallet/btc">Wallets</a></li>
+                        <li><a href="#!/wallet/aud">Wallets</a></li>
                         <li><a href="#!/orders">Orders</a></li>
                         <li><a href="">Markets</a></li>
                         <li><a href="#">Bank Accounts</a></li>
-                        <li><a href="#!/sunny/profile">Profile</a></li>
+                        <li><a href="#!/{{userName}}/profile">Profile</a></li>
                     </ul>
                 </div>
             </nav>
@@ -77,11 +78,7 @@
                         </div>
                         <div class="col m6 hide-on-small-only">
                             <ul class="coin-list flex-fixed center-align right">
-                                <li>0 <br> BTC/AUD </li>
-                                <li>0 <br> ETH/AUD</li>
-                                <li>0 <br> LSK/AUD</li>
-                                <li>0 <br> LTC/AUD</li>
-                                <li>0 <br> NEO/AUD</li>
+                                <li ng-repeat="coin in coins|orderBy : 'rank' ">{{coin.price}} <br> {{coin.symbol}}/AUD </li>
                             </ul>
                         </div>
                     </div>
@@ -127,6 +124,7 @@
     <script src="controllers/profile.js"></script>
     <script src="controllers/kyc.js"></script>
     <script src="controllers/twofactrl.js"></script>
+    <script src="controllers/pricechange.js"></script>
 
 </body>
 

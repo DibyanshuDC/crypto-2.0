@@ -1,7 +1,7 @@
 <div id="market" class="container-fluid">
     <div ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
-            <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
+            <p class="col no-margin s11">{{result}}</p>
             <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
         </div>
     </div>
@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>Bank</th>
-                                    <th>Account Name</th>
+                                    <th>Account Holder</th>
                                     <th>Account Number</th>
                                     <th>Agency number</th>
                                     <th>cpf number</th>
@@ -29,68 +29,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="acc in bankAccs">
                                     <td>
-                                        AXIS
+                                        {{acc.bank_name}}
                                     </td>
-                                    <td>dsf</td>
+                                    <td>{{acc.usr_name}}</td>
                                     <td>
-                                        dfasrqe114141
+                                        {{acc.account_number}}
                                     </td>
                                     <td>123</td>
-                                    <td></td>
+                                    <td>{{acc.bsb_code}}</td>
                                     <td>
-                                        <span class="label label-success"><a>Verify</a></span>
+                                        <!--                                       if status is not verified-->
+                                        <span ng-if="acc.status=='Active'"><a class=" green padding-sm white-text">Verified</a>
+                                        <a ng-if="acc.is_primary=='0'" ng-click="makePrimaryAcc(acc)">
+                                                <i class="material-icons red-text">flash_off</i>
+                                            </a>
+                                        <a ng-if="acc.is_primary!='0'">
+                                                <i class="material-icons green-text">flash_on</i>
+                                            </a>
+                                        </span>
+                                        <span ng-if="acc.status!='Active'"><a href="">Verify</a></span>
                                     </td>
                                     <td class="text-center">
-                                        <ul class="icons-list">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-                                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-
-
-                                                    <li><a href="/user_bank_account/1/delete" class="delete"><i
+                                        <a ng-click="deleteAcc(acc)" class="delete"><i
                                                             class="fa fa-trash"></i> Delete
                                                 </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        ICICI
-                                    </td>
-                                    <td>asdasdasd</td>
-                                    <td>
-                                        asdasdasd
-                                        <span class="badge green white-text" data-toggle="tooltip" title="Default"><i
-                                                class="fa fa-check"></i> </span>
-                                    </td>
-                                    <td>asdasd</td>
-                                    <td>asd</td>
-                                    <td>
-                                        <span class="badge green white-text">Active</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <ul class="icons-list">
-                                            <li class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-menu9"></i>
-                                        </a>
-                                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-
-
-                                                    <li><a href="/user_bank_account/3/delete" class="delete"><i
-                                                            class="fa fa-trash"></i> Delete
-                                                </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
                                     </td>
                                 </tr>
                             </tbody>
@@ -100,53 +64,65 @@
                     <div ng-show="addAccBox">
                         <div class="row">
                             <div class="col s12 m6">
-                                <select class="browser-default">
+                                <select ng-model="bank_name" class="browser-default">
                                     <option value="" disabled selected>Choose your Bank</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    <option ng-repeat="bank in bankList" value="{{bank.bank_name}}">{{bank.bank_name}}</option>
                                 </select>
-                                <label>Browser Select</label>
+                                <label>Bank Select</label>
                             </div>
                             <div class="col s12 m6">
                                 <div class="browser-default">
-                                    <input disabled value="User Name" id="disabled" type="text" class="validate">
+                                    <input ng-model="username" style="color:black; font-weight: bolder" value="User Name" id="disabled" type="text" class="validate">
                                 </div>
                                 <label for="disabled">Name of Account Holder</label>
                             </div>
                             <div class="col s12 m6">
                                 <div class="browser-default">
-                                    <input id="acc_num" type="text" class="validate">
+                                    <input ng-model="acc_num" id="acc_num" type="text" class="validate">
                                 </div>
                                 <label for="acc_num">Account Number</label>
                             </div>
                             <div class="col s12 m6">
                                 <div class="browser-default">
-                                    <input id="acc_num" type="text" class="validate">
+                                    <input ng-model="acc_branch" id="acc_branch" type="text" class="validate">
                                 </div>
-                                <label for="acc_num">Account Number</label>
+                                <label for="acc_branch">Branch Code</label>
                             </div>
                             <div class="col s12 m6">
                                 <div class="browser-default">
-                                    <input id="acc_num" type="text" class="validate">
+                                    <input ng-model="acc_bsb" id="acc_num" type="text" class="validate">
                                 </div>
-                                <label for="acc_num">Account Number</label>
+                                <label for="acc_bsb">BSB Code</label>
                             </div>
                             <div class="col s12 m6">
                                 <div class="browser-default">
-                                    <input id="acc_num" type="text" class="validate">
+                                    <input ng-model="acc_descr" id="acc_num" type="text" class="validate">
                                 </div>
-                                <label for="acc_num">Account Number</label>
+                                <label for="acc_num">Description</label>
                             </div>
                             <div class="col s12">
                                 <br>
                                 <a ng-click="cancel()" href="" class="left btn red">Cancel</a>
-                                <a href="" class="right btn blue">Submit</a>
+                                <a ng-click="confirmAddAcc()" class="right btn blue">Submit</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4>Are you sure ?</h4>
+        <p>{{modalInfo.text_dsc}}</p>
+        <br>
+        <div style="justify-content: center" class="full-width"><a ng-repeat="button in modalInfo.buttons" class="btn {{button.class}}">{{button.text}}</a></div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">Cancel</a>
     </div>
 </div>

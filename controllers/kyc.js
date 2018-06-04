@@ -10,51 +10,68 @@ angular.module('cryptoCentric')
         $scope.progress = 2;
         $scope.save = function () {
 
-        }
+        };
 
-        $scope.supportdocs = [{}];
-        $scope.updateDocs = function (item) {
-            $scope.score = $scope.score + item.value;
-            $scope.supportdocs.push({});
-            $filter('filterName')($scope.docs, item.value);
-        }
+
+        $scope.userdocs = [''];
+
+
+        $scope.updateDocs = function (i) {
+            var abc = $filter('filter')($scope.supported_docs, {
+                idType: $scope.userdocs[i]
+            })[0];
+
+
+            $scope.score += abc.value;
+            if ($scope.score < 100) {
+                $scope.userdocs.push(abc.idType);
+            }
+
+
+            console.log($scope.userdocs);
+
+        };
 
         $scope.score = 0;
 
-        $scope.docs = [
+        $scope.supported_docs = [
             {
-                idType: "Passport",
+                name: "Passport",
+                idType: "passport",
                 value: 70
         }, {
-                idType: "Birth Certificate",
+                name: "Birth Certificate",
+                idType: "dob",
                 value: 70
         },
             {
-                idType: "Citizenship",
+                name: "Citizenship",
+                idType: "citizenship",
                 value: 70
         },
             {
-                idType: "ICard Public Employee",
+                name: "ICard Public Employee",
+                idType: "employee",
                 value: 40
         },
             {
-                idType: "ICard Public Employee",
-                value: 40
-        },
-            {
-                idType: "Other Auth by State ",
+                name: "Other Auth by State ",
+                idType: "otherAuth",
                 value: 35
         },
             {
-                idType: "Mortgage/Land Tax",
+                name: "Mortgage/Land Tax",
+                idType: "mortgage",
                 value: 35
         },
             {
-                idType: "Credit Card",
+                name: "Credit Card",
+                idType: "creditCard",
                 value: 25
         },
             {
-                idType: "Rent Agreement",
+                name: "Rent Agreement",
+                idType: "rent",
                 value: 25
         }];
 
@@ -73,7 +90,6 @@ angular.module('cryptoCentric')
         //        var elems = document.querySelectorAll('select');
         //        var instances = M.FormSelect.init(elems, {});
         //        var instance = M.FormSelect.getInstance(instances);
-
 
 
 

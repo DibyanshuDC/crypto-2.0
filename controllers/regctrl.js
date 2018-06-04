@@ -21,9 +21,12 @@ angular.module('cryptoCentric')
                     ],
                     "userName": $scope.email,
                     "name": {
-                        "familyName": $scope.email.split('@')[0]
+                        "familyName": $scope.lname,
+                        "fname": $scope.fname
+
                     },
                     "password": $scope.password,
+                    "displayName": $scope.email.split('@'),
                     "phoneNumbers": [
                         {
                             "value": $scope.contact,
@@ -51,7 +54,7 @@ angular.module('cryptoCentric')
                         headers: {
                             'Authorization': 'Basic eGVsc3lzYWRtOldlbGNvbWUx',
                             'Content-Type': "application/scim+json"
-                        },
+                        }
                     })
                     .then(function (response) {
                             // success
