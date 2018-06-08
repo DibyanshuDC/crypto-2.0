@@ -3,7 +3,7 @@
 angular.module('cryptoCentric')
     .controller('HomeCtrl', function ($scope, $http, cons) {
         $scope.show = false;
-        $scope.alert = true;
+        $scope.alert = false;
 
         function verifytoken() {
             if (typeof (Storage) !== "undefined") {

@@ -7,6 +7,24 @@ angular.module('cryptoCentric')
         var token = localStorage.getItem("token");
 
 
+        $scope.changePass = false;
+        $scope.changeProfile = false;
+
+
+        $scope.changePassAct = function () {
+            $scope.changePass = true;
+        }
+
+        $scope.changeProfileAct = function () {
+            $scope.changeProfile = true;
+        }
+
+        $scope.cancelbox = function () {
+            $scope.changePass = false;
+            $scope.changeProfile = false;
+        }
+
+
         $http({
             url: cons.bs.im + 'idaas/im/scim/v1/Me',
             method: "GET",

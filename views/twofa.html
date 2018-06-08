@@ -1,5 +1,5 @@
 <div id="wallet" class="container-fluid">
-    <div ng-show ="alert"     ng-show="alert"   class="alert-blue margin lighten-5">
+    <div ng-show="alert" ng-show="alert" class="alert-blue margin lighten-5">
         <div class="row no-margin">
             <p class="col no-margin s11">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus.</p>
             <p class="col no-margin s1 right-align"><i ng-click="alert=false" class="fa fa-times"></i></p>
@@ -12,22 +12,41 @@
                     <big><strong>Enable 2FA</strong></big>
                 </div>
                 <div class="card-content">
-                    <div ng-hide="enabled" class="row">
+                    <div ng-show="enabler" class="row">
                         <div class="col s12">
                             <a ng-click="enableBox()" href="" class="btn blue left">ENABLE 2 FA</a>
                         </div>
                     </div>
-                    <div ng-show="enabled" class="row">
+                    <div ng-show='enabling' class="row">
+                        <style>
+                            #qrcode {
+                                margin-top: 15px;
+                            }
+
+                        </style>
                         <div class="col s12">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores tempore error voluptatem eaque accusamus odio rerum maxime, illum modi at.
-                            <p>Please provide your number</p>
+                            <p><big>There are a couple of steps to complete the setup</big></p>
+                            <br>
+                            <br>
+                            <p class="underline">Step 1:</p>
+                            <p>Open the Google Authenticator App on your mobile and either enter the secret below or scan the QR code. <br> <b>{{secretkey}}</b>
+                            </p>
+                            <div id="qrcode"></div>
+                            <br><br>
+
+                            <p class="underline">Step 2:</p>
+                            <p>Enter the current token which appears in the Google Authenticator App and click Submit</p>
+                            <p><b>Token</b></p>
                             <div class="input-field">
                                 <span class="prefix"><i class="fa fa-phone-square fa-flip-horizontal"></i></span>
-                                <input id="icon_telephone" type="tel" class="validate">
-                                <label for="icon_telephone">Telephone</label>
+                                <input ng-model="otp" id="icon_telephone" type="tel" class="validate">
+                                <label for="icon_telephone">OTP</label>
                             </div>
                         </div>
-                        <a href="" class="btn blue">Submit</a>
+                        <a ng-click="submitOTP()" class="btn blue">Submit</a>
+                    </div>
+                    <div ng-show='enabled' class="row">
+                        <a ng-click="disable2fa()" class="btn red">Disable 2FA</a>
                     </div>
                 </div>
             </div>

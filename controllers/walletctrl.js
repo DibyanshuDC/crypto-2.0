@@ -92,18 +92,18 @@ angular.module('cryptoCentric')
 
 
         $http({
-            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
+            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/coin/txn/history?usr_key=' + userkey + '&coinname=' + $scope.selectedWallet.name + '&access_token=' + token,
             method: "GET"
         }).then(function (response) {
-            $scope.deposithistory = response.data;
+            $scope.txnhistory = response.data;
         });
-
-        $http({
-            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
-            method: "GET"
-        }).then(function (response) {
-            $scope.withdrawhistory = response.data;
-        });
+            //
+            //        $http({
+            //            url: cons.bs.o + 'DBOperations/rest/UserService/fetch/bankaccount?usr_key=' + userkey + '&access_token=' + token,
+            //            method: "GET"
+            //        }).then(function (response) {
+            //            $scope.withdrawhistory = response.data;
+            //        });
 
 
         $http({

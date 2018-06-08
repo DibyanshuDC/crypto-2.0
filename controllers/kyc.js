@@ -14,21 +14,67 @@ angular.module('cryptoCentric')
 
 
         $scope.userdocs = [''];
+        var tempuserdocs = [''];
 
 
         $scope.updateDocs = function (i) {
-            var abc = $filter('filter')($scope.supported_docs, {
-                idType: $scope.userdocs[i]
-            })[0];
+
+            var currEl = $scope.userdocs[i];
+
+            var count = $filter('filter')($scope.userdocs, currEl);
+            var def;
+
+            if (count.length > 1) {
+                $scope.userdocs[i] = '';
+                tempuserdocs[i] = '';
+                def = $filter('filter')($scope.supported_docs, {
+                    idType: tempuserdocs[i]
+                })[0];
+
+                $scope.score -= def.value;
+                if ($scope.score < 1) {
+                    $scope.score = 0;
+                }
+            } else {
+                var abc = $filter('filter')($scope.supported_docs, {
+                    idType: $scope.userdocs[i]
+                })[0];
 
 
-            $scope.score += abc.value;
-            if ($scope.score < 100) {
-                $scope.userdocs.push(abc.idType);
+                if ($scope.userdocs[i] != tempuserdocs[i] && tempuserdocs[i] != '') {
+                    def = $filter('filter')($scope.supported_docs, {
+                        idType: tempuserdocs[i]
+                    })[0];
+
+                    $scope.score -= def.value;
+                    //if ($scope.score)
+
+
+                }
+                $scope.score += abc.value;
+                tempuserdocs = $scope.userdocs.slice();
+
+
+                //decrease the score
+                //then
+
+                if ($scope.score < 100 && !$scope.userdocs.includes('')) {
+                    $scope.userdocs.push('');
+                    tempuserdocs.push('');
+                }
+
+            };
+            if ($scope.score >= 100) {
+
+                for (i = 0; i < $scope.userdocs.length; i++) {
+                    if ($scope.userdocs[i] == '') {
+                        $scope.userdocs.splice(i, 1);
+                        tempuserdocs = $scope.userdocs;
+                    }
+                }
+
+
             }
-
-
-            console.log($scope.userdocs);
 
         };
 
